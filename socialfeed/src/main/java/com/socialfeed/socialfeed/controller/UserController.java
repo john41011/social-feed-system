@@ -1,5 +1,7 @@
 package com.socialfeed.socialfeed.controller;
 
+import com.socialfeed.socialfeed.dto.LoginRequest;
+import com.socialfeed.socialfeed.dto.LoginResponse;
 import com.socialfeed.socialfeed.dto.SignupRequest;
 import com.socialfeed.socialfeed.dto.UserResponse;
 import com.socialfeed.socialfeed.service.UserService;
@@ -20,5 +22,11 @@ public class UserController {
     public ResponseEntity<UserResponse> signup(@Valid @RequestBody SignupRequest request) {
         UserResponse response = userService.signup(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse response = userService.login(request);
+        return ResponseEntity.ok(response);
     }
 }
