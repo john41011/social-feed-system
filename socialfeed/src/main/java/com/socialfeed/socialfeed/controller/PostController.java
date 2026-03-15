@@ -32,6 +32,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
     
+    @GetMapping("/feed")
+    public ResponseEntity<List<PostResponse>> getFeed(@RequestHeader("X-User") String username) {
+        List<PostResponse> feed = postService.getFeed(username);
+        return ResponseEntity.ok(feed);
+    }
+    
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getPost(@PathVariable Long id) {
         PostResponse post = postService.getPost(id);

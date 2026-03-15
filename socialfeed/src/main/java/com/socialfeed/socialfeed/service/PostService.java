@@ -67,4 +67,14 @@ public class PostService {
         
         postRepository.delete(post);
     }
+    
+    public List<PostResponse> getFeed(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+        
+        return postRepository.findFeedByUserId(user.getId())
+                .stream()
+                .map(PostResponse::from)
+                .collect(Collectors.toList());
+    }
 }
